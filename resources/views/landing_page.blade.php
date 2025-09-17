@@ -7,20 +7,15 @@
     <title>Drip & Co - Minimalis Rasa Maksimal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom font style similar to the mockup for headings */
         @import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Inline+One&family=Baloo+2&display=swap');
 
         body {
             font-family: 'Baloo 2', cursive;
             background: #fff7eb;
             background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/your-background-image.jpg');
-            /* Replace with the actual image URL */
             background-size: cover;
-            /* Cover the entire area */
             background-position: center;
-            /* Center the image */
             background-repeat: no-repeat;
-            /* Prevent repeating */
             color: #633a00;
             line-height: 1.4;
         }
@@ -29,14 +24,12 @@
             font-family: 'Baloo 2', cursive;
         }
 
-        /* Drip & Co heading style */
         .heading-drip {
             font-weight: 900;
             font-size: 2.75rem;
             letter-spacing: 0.03em;
         }
 
-        /* Strikethrough original price styling */
         .original-price {
             text-decoration: line-through;
             font-size: 0.875rem;
@@ -44,7 +37,6 @@
             font-weight: 700;
         }
 
-        /* Best seller badge style */
         .best-seller-badge {
             background: #f3ddbd;
             color: #4d2f00;
@@ -59,7 +51,6 @@
             user-select: none;
         }
 
-        /* Button style for login */
         .btn-login {
             background-color: #633a00;
             color: #f6d8a1;
@@ -77,7 +68,6 @@
             text-decoration: none;
         }
 
-        /* Navigation links style */
         nav a {
             font-weight: 600;
             font-size: 0.875rem;
@@ -91,7 +81,6 @@
             outline: none;
         }
 
-        /* Icon arrow in nav */
         .nav-arrow {
             background-color: #633a00;
             color: #fbc156ff;
@@ -121,8 +110,8 @@
     <header class="bg-[#fbedd9] border-b border-[#cc9f59]">
         <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 text-sm select-none">
             <div class="flex space-x-8 font-semibold font-special">
-                <a href="#" class="hover:underline focus:underline">Lihat Menu</a>
-                <a href="#" class="hover:underline focus:underline">Tentang kami</a>
+                <a href="{{ route('user.menu') }}" class="hover:underline focus:underline">Lihat Menu</a>
+                <a href="{{ route('about_us') }}" class="hover:underline focus:underline">Tentang kami</a>
             </div>
             <div>
                 <a href="{{ route('login') }}" class="flex items-center gap-2 font-semibold tracking-wide text-[#633a00]">
@@ -157,21 +146,18 @@
                     </p>
 
                     @if(Route::has('login'))
-
-                    @auth
-                    <a
-                        href="{{ auth()->check() ? (auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard')) : '#' }}"
-                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                        Dashboard
-                    </a>
-
-                    @else
-                    <a href="{{route('login')}}" class="btn-login inline-block" role="button" tabindex="0">LOGIN</a>
-
-                        @if (Route::has('register'))
-                        <a href="{{ route('register')}}" class="btn-login inline-block" role="button" tabindex="0">DAFTAR</a>
-                        @endif
-                    @endauth
+                        @auth
+                            <a
+                                href="{{ auth()->check() ? (auth()->user()->role === 'admin' ? route('admin.dashboard') : route('user.dashboard')) : '#' }}"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                                Dashboard
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn-login inline-block" role="button" tabindex="0">LOGIN</a>
+                            @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="btn-login inline-block" role="button" tabindex="0">DAFTAR</a>
+                            @endif
+                        @endauth
                     @endif
                 </section>
 
@@ -192,11 +178,10 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                    <!-- First Image - Coffee Cup -->
                     <div class="relative w-full sm:w-48 md:w-56 rounded-lg shadow-lg overflow-hidden flex-shrink-0" aria-label="Photo of a cup of latte coffee with latte art on top and coffee beans around the cup">
                         <img
                             src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3acc4bda-19e2-47e4-9796-07a5d24fa9b8.png"
-                            alt="A cup of latte coffee with beautiful latte art on a wooden surface surrounded by coffee beans, style: warm, cozy cafe ambiance with wooden textures and natural lighting"
+                            alt="A cup of latte coffee with beautiful latte art on a wooden surface surrounded by coffee beans"
                             class="w-full h-auto object-cover rounded-lg shadow-md"
                             style="aspect-ratio: 4/3;"
                             onerror="this.style.display='none'" />
@@ -208,20 +193,16 @@
                         </div>
                     </div>
 
-                    <!-- Second Image - Barista -->
-                    <div
-                        class="rounded-xl shadow-lg w-full sm:w-48 md:w-56 flex-shrink-0 overflow-hidden"
-                        aria-label="Photo of a smiling young woman barista pouring milk into a coffee cup forming latte art in a cozy coffee shop counter interior">
+                    <div class="rounded-xl shadow-lg w-full sm:w-48 md:w-56 flex-shrink-0 overflow-hidden" aria-label="Photo of a smiling young woman barista pouring milk into a coffee cup">
                         <img
                             src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b0099b9c-b571-4356-84db-66b68d92b59e.png"
-                            alt="Smiling young woman barista wearing a beige apron carefully pouring steamed milk into a coffee cup creating latte art inside a warm, cozy coffee shop with espresso machines in background"
+                            alt="Smiling young woman barista pouring steamed milk into a coffee cup"
                             class="w-full h-auto object-cover"
                             style="aspect-ratio: 3/4;"
                             onerror="this.style.display='none'" />
                     </div>
                 </div>
 
-                <!-- Sponsor Box - positioned below images -->
                 <div class="p-2 mt-6 bg-[#fde7bd] text-[#633a00] rounded text-xs max-w-xs font-semibold tracking-tight text-left border border-[#c7ac6b] shadow-sm">
                     <p>Disponsori oleh:</p>
                     <p>PT.Beli kopi indonesia <br /><a href="https://www.BeliKopi.com" target="_blank" rel="noopener noreferrer" class="underline">www.BeliKopi.com</a></p>
@@ -235,5 +216,4 @@
     </footer>
 
 </body>
-
 </html>

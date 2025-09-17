@@ -130,6 +130,7 @@ class ProductController extends Controller
 
         $data = $request->all();
         $data['category'] = 'kopi';
+        $data['is_active'] = 1;
 
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('menus', 'public');
@@ -137,7 +138,7 @@ class ProductController extends Controller
 
         Menu::create($data);
 
-        return redirect()->route('stok.kopi');
+        return redirect()->route('stok.index', ['category' => 'kopi']);
     }
 
     // Menambahkan produk baru untuk Ice Cream
@@ -152,6 +153,7 @@ class ProductController extends Controller
 
         $data = $request->all();
         $data['category'] = 'ice_cream';
+        $data['is_active'] = 1;
 
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('menus', 'public');
@@ -159,7 +161,7 @@ class ProductController extends Controller
 
         Menu::create($data);
 
-        return redirect()->route('stok.iceCream');
+        return redirect()->route('stok.index', ['category' => 'ice_cream']);
     }
 
     // Menambahkan produk baru untuk Roti
@@ -174,6 +176,7 @@ class ProductController extends Controller
 
         $data = $request->all();
         $data['category'] = 'roti';
+        $data['is_active'] = 1;
 
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('menus', 'public');
@@ -181,7 +184,7 @@ class ProductController extends Controller
 
         Menu::create($data);
 
-        return redirect()->route('stok.roti');
+        return redirect()->route('stok.index', ['category' => 'roti']);
     }
 
 

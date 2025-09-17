@@ -10,42 +10,70 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    // Halaman pilih metode pembayaran
+    /**
+     * Halaman checkout dari cart.
+     */
+    public function checkout()
+    {
+        return view('user.transaction.checkout');
+    }
+
+    /**
+     * Halaman pilih metode pembayaran (single order, opsional).
+     */
     public function create($menu_id)
     {
         $menu = Menu::findOrFail($menu_id);
         return view('user.transaction.create', compact('menu'));
     }
 
-    // Simpan transaksi
-    public function store(Request $request, $menu_id)
+    /**
+     * Menyimpan transaksi dari cart.
+     * Status otomatis "done" setelah klik beli sekarang.
+     */
+    public function store(Request $request)
     {
-        $menu = Menu::findOrFail($menu_id);
+        try {
+            $cart = json_decode($request->input('cart'), true);
+            $paymentMethod = $request->input('payment_method');
+            $total = $request->input('total');
 
-        $request->validate([
-            'payment_method' => 'required|in:transfer,cod',
-            'quantity' => 'required|integer|min:1'
-        ]);
+            if (!$cart || !$paymentMethod || !$total) {
+                return back()->withErrors(['msg' => 'Data tidak lengkap!']);
+            }
 
-        // buat transaksi
-        $transaction = Transaction::create([
+            // Simpan transaksi utama
+            $transaction = Transaction::create([
             'user_id' => Auth::id(),
-            'menu_id' => $menu->id,
-            'quantity' => $request->quantity,
-            'total' => $menu->harga * $request->quantity,
-            'payment_method' => $request->payment_method,
-            'status' => 'done', // default done
+            'menu_id' => $cart[0]['id'], // ✅ isi dengan menu pertama di cart
+            'quantity' => array_sum(array_column($cart, 'qty')),
+            'total' => $total,
+            'payment_method' => $paymentMethod,
+            'status' => 'done',
         ]);
 
-        // kurangi stok menu
-        $menu->decrement('stok', $request->quantity);
 
-        return redirect()
-            ->route('user.transaction.show', $transaction->id)
-            ->with('success', 'Transaksi berhasil!');
+            // Update stok untuk tiap menu yang dibeli
+            foreach ($cart as $item) {
+                $menu = Menu::find($item['id']);
+                if ($menu) {
+                    $menu->decrement('stok', $item['qty']);
+                }
+            }
+
+            // Redirect ke halaman detail transaksi
+            return redirect()->route('user.transaction.show', $transaction->id)
+                             ->with('success', 'Transaksi berhasil!');
+
+        } catch (\Exception $e) {
+            \Log::error('Error transaksi: ' . $e->getMessage());
+            return back()->withErrors(['msg' => 'Server error: ' . $e->getMessage()]);
+        }
     }
 
-    // Detail transaksi user
+    /**
+     * Menampilkan detail transaksi user.
+     */
     public function show($id)
     {
         $transaction = Transaction::where('user_id', Auth::id())->findOrFail($id);

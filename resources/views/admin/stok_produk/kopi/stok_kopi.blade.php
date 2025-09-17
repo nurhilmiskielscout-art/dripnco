@@ -127,9 +127,9 @@
 
     <!-- Content -->
     <div class="content">
-      <h2>Stok Produk <span>Ice</span></h2>
+      <h2>Stok Produk <span>Kopi</span></h2>
 
-      <a href="{{ route('form.iceCream') }}"
+      <a href="{{ route('form.kopi') }}"
         class="px-4 py-2 bg-green-600 text-white rounded-md">
         Tambah Produk
       </a>
@@ -153,7 +153,7 @@
             </td>
             <td><b>Rp{{ number_format($product->harga, 0, ',', '.') }}</b></td>
             <td>{{ $product->stok }}</td>
-            <td><a href="{{ route('edit.iceCream', $product->id) }}" class="btn">Edit</a></td>
+            <td><a href="{{ route('edit.kopi', $product->id) }}" class="btn">Edit</a></td>
             <td>
               <form action="{{ route('delete.iceCream', $product->id) }}" method="POST">
                 @csrf

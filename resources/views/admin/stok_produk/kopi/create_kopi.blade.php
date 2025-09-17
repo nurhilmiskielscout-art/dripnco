@@ -34,7 +34,7 @@
         </div>
 
         <div class="flex justify-end">
-            <a href="{{ route('stok.kopi') }}" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>
+            <a href="{{ route('stok.index', ['category' => 'kopi']) }}" class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
         </div>
     </form>

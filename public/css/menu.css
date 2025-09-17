@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff7ef;
+  display: flex;
+}
+
+.content {
+  margin-left: 260px;
+  padding: 20px;
+  flex: 1;
+}
+
+.search-bar {
+  margin: 10px 0 20px;
+  max-width: 600px;
+  display: flex;
+  border: 2px solid #d4a373;
+  border-radius: 10px;
+  padding: 10px;
+  color: #aaa;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  color: #5a3921;
+  background: transparent;
+}
+
+.kategori-title {
+  margin: 20px 0 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #5a3921;
+  border-bottom: 2px solid #c29b7a;
+  padding-bottom: 5px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.menu-item {
+  background: white;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+}
+
+.menu-item img {
+  width: 100%;
+  border-radius: 12px;
+  height: 130px;
+  object-fit: cover;
+}
+
+.menu-item h3 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.menu-item p {
+  margin: 0;
+  font-size: 14px;
+  color: #5a3921;
+  font-weight: bold;
+}
+
+.menu-item a.detail-btn {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  padding: 5px 10px;
+  background: #5a3921;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.lihat-semua {
+  margin: 10px 0 30px;
+  text-align: right;
+}
+
+.lihat-semua a {
+  font-size: 13px;
+  text-decoration: none;
+  color: #5a3921;
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .content {
+    margin-left: 0;
+    padding: 10px;
+  }
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    flex-direction: row;
+    padding: 10px;
+  }
+  .about-container, .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}

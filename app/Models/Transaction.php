@@ -16,6 +16,7 @@ class Transaction extends Model
         'total',
         'payment_method',
         'status',
+        'order_id',
     ];
 
     public function menu()
@@ -26,5 +27,10 @@ class Transaction extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
     }
 }

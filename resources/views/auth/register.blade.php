@@ -140,18 +140,7 @@
         <h1>SELAMAT DATANG DI DRIP&CO</h1>
 
         <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input id="username" type="text" name="username" value="{{ old('username') }}" required>
-                @error('username')
-                <div class="error">{{ $message }}</div>
-                @enderror
-            </div>
-
-
-
+@csrf
             <!-- Name -->
             <div class="form-group">
                 <label for="name">Nama</label>
